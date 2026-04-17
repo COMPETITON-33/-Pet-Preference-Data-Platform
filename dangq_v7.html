@@ -263,7 +263,7 @@ h1 { font-size:38px; font-weight:900; line-height:1.3; letter-spacing:-1px; marg
 /* 3-card fan layout */
 .report-right {
   position: relative;
-  height: 400px;
+  height: 430px;
   overflow: visible;
 }
 .report-cards-wrap {
@@ -276,34 +276,39 @@ h1 { font-size:38px; font-weight:900; line-height:1.3; letter-spacing:-1px; marg
   position: absolute;
   background: #fff;
   border-radius: 10px;
-  box-shadow: 0 6px 32px rgba(0,0,0,0.13);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.18);
   overflow: hidden;
   border: 1px solid #e8e8e8;
 }
-/* Card 1 — far left, rotated back, blurred (text doc) */
+.rcard img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* Card 1 — far left */
 .rcard-1 {
   width: 280px; height: 370px;
-  top: 16px; left: -10px;
+  top: 28px; left: 0;
   transform: rotate(-4deg);
   z-index: 1;
-  filter: blur(2px);
-  opacity: 0.65;
+  filter: blur(1.8px);
+  opacity: 0.72;
 }
-/* Card 2 — center front with charts + lock overlay */
+/* Card 2 — center front */
 .rcard-2 {
-  width: 310px; height: 380px;
-  top: 0px; left: 210px;
+  width: 320px; height: 390px;
+  top: 10px; left: 210px;
   z-index: 3;
-  filter: blur(0px);
 }
-/* Card 3 — right, slightly rotated, blurred (line chart) */
+/* Card 3 — right */
 .rcard-3 {
-  width: 285px; height: 365px;
-  top: 22px; left: 440px;
-  transform: rotate(3deg);
+  width: 280px; height: 365px;
+  top: 28px; left: 470px;
+  transform: rotate(4deg);
   z-index: 2;
-  filter: blur(2.5px);
-  opacity: 0.7;
+  filter: blur(2px);
+  opacity: 0.72;
 }
 .rcard-header {
   background: #f2f2f2;
@@ -553,43 +558,9 @@ h1 { font-size:38px; font-weight:900; line-height:1.3; letter-spacing:-1px; marg
     <div class="report-right">
       <div class="report-cards-wrap">
 
-        <!-- Card 1: text doc — far left, blurred -->
+        <!-- Card 1: image — far left -->
         <div class="rcard rcard-1">
-          <div class="rcard-header">🐾 댕큐! Pet Preference Data Platform — Commissioned Research Report</div>
-          <div class="rcard-body">
-            <!-- 제목 줄 -->
-            <div class="rcard-line full green" style="height:10px;margin-bottom:12px;"></div>
-            <!-- 본문 단락 -->
-            <div class="rcard-line full"></div>
-            <div class="rcard-line full"></div>
-            <div class="rcard-line med"></div>
-            <div class="rcard-line full"></div>
-            <div class="rcard-line short"></div>
-            <div class="rcard-line full"></div>
-            <div class="rcard-line full"></div>
-            <div style="margin:10px 0 8px;border-top:1px solid #f0f0f0;"></div>
-            <div class="rcard-line full"></div>
-            <div class="rcard-line med"></div>
-            <div class="rcard-line full"></div>
-            <div class="rcard-line full"></div>
-            <div class="rcard-line short"></div>
-            <div class="rcard-line med"></div>
-            <div class="rcard-line full"></div>
-            <div style="margin:10px 0 8px;border-top:1px solid #f0f0f0;"></div>
-            <div class="rcard-line full"></div>
-            <div class="rcard-line med"></div>
-            <div class="rcard-line full"></div>
-            <div class="rcard-line short"></div>
-            <!-- bullet list items -->
-            <div style="display:flex;align-items:center;gap:6px;margin-top:6px;">
-              <div style="width:6px;height:6px;border-radius:50%;background:#ddd;flex-shrink:0;"></div>
-              <div class="rcard-line full" style="margin:0;flex:1;"></div>
-            </div>
-            <div style="display:flex;align-items:center;gap:6px;margin-top:5px;">
-              <div style="width:6px;height:6px;border-radius:50%;background:#ddd;flex-shrink:0;"></div>
-              <div class="rcard-line med" style="margin:0;flex:1;"></div>
-            </div>
-          </div>
+          <img src="assets/paid-report-center.png" alt="left report">
         </div>
 
         <!-- Card 2: image (center, with lock overlay) -->
@@ -608,62 +579,9 @@ h1 { font-size:38px; font-weight:900; line-height:1.3; letter-spacing:-1px; marg
           </div>
         </div>
 
-        <!-- Card 3: line chart — right, blurred -->
+        <!-- Card 3: image — right -->
         <div class="rcard rcard-3">
-          <div class="rcard-header">연령별 기호도 추이 분석 · 에러틴텀 기긴이리 개선 saquelsic</div>
-          <div class="rcard-body">
-            <svg width="100%" height="90" viewBox="0 0 240 90" preserveAspectRatio="none">
-              <polyline points="0,75 40,58 80,65 120,40 160,26 200,16 240,10" fill="none" stroke="#2d8653" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <polyline points="0,78 40,68 80,56 120,65 160,50 200,42 240,36" fill="none" stroke="#b0c8bc" stroke-width="2" stroke-dasharray="5,3" stroke-linecap="round"/>
-              <circle cx="240" cy="10" r="4" fill="#2d8653"/>
-              <circle cx="240" cy="36" r="4" fill="#b0c8bc"/>
-            </svg>
-            <div style="display:flex;justify-content:space-between;margin-top:2px;">
-              <span style="font-size:8px;color:#ccc;">1세 미만</span>
-              <span style="font-size:8px;color:#ccc;">1~3세</span>
-              <span style="font-size:8px;color:#ccc;">4~7세</span>
-              <span style="font-size:8px;color:#ccc;">7세 이상</span>
-            </div>
-            <!-- donut chart placeholder -->
-            <div style="margin-top:14px;display:flex;align-items:center;gap:14px;">
-              <svg width="80" height="80" viewBox="0 0 80 80">
-                <!-- donut slices approximation -->
-                <circle cx="40" cy="40" r="30" fill="none" stroke="#e8e8e8" stroke-width="16"/>
-                <circle cx="40" cy="40" r="30" fill="none" stroke="#2d8653" stroke-width="16"
-                  stroke-dasharray="119 69" stroke-dashoffset="0"/>
-                <circle cx="40" cy="40" r="30" fill="none" stroke="#6dbb91" stroke-width="16"
-                  stroke-dasharray="66 122" stroke-dashoffset="-119"/>
-                <circle cx="40" cy="40" r="30" fill="none" stroke="#b0c8bc" stroke-width="16"
-                  stroke-dasharray="3 185" stroke-dashoffset="-185"/>
-                <circle cx="40" cy="40" r="22" fill="#fff"/>
-              </svg>
-              <div style="flex:1;">
-                <div style="display:flex;align-items:center;gap:5px;margin-bottom:4px;">
-                  <div style="width:8px;height:8px;border-radius:2px;background:#2d8653;"></div>
-                  <span style="font-size:10px;color:#aaa;">51%</span>
-                </div>
-                <div style="display:flex;align-items:center;gap:5px;margin-bottom:4px;">
-                  <div style="width:8px;height:8px;border-radius:2px;background:#6dbb91;"></div>
-                  <span style="font-size:10px;color:#aaa;">42%</span>
-                </div>
-                <div style="display:flex;align-items:center;gap:5px;margin-bottom:4px;">
-                  <div style="width:8px;height:8px;border-radius:2px;background:#b0c8bc;"></div>
-                  <span style="font-size:10px;color:#aaa;">42%</span>
-                </div>
-                <div style="display:flex;align-items:center;gap:5px;">
-                  <div style="width:8px;height:8px;border-radius:2px;background:#e8e8e8;"></div>
-                  <span style="font-size:10px;color:#aaa;">23%</span>
-                </div>
-              </div>
-            </div>
-            <!-- text lines -->
-            <div style="margin-top:12px;">
-              <div class="rcard-line full"></div>
-              <div class="rcard-line med green"></div>
-              <div class="rcard-line full"></div>
-              <div class="rcard-line short"></div>
-            </div>
-          </div>
+          <img src="assets/paid-report-center.png" alt="right report">
         </div>
 
       </div>
