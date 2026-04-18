@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>댕큐! 초기 사이트</title>
+  <title>댕큐! (DangQ) - 통합 플랫폼</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet" />
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -11,86 +11,122 @@
       font-family: "Noto Sans KR", sans-serif;
       min-height: 100vh;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       background: linear-gradient(135deg, #f6fbf8 0%, #ffffff 100%);
       color: #1a1a1a;
-      padding: 24px;
+      padding: 20px;
     }
 
-    .b2b-link-box {
-      width: 100%;
-      max-width: 420px;
-      padding: 28px 24px;
-      border: 1px solid #e7ece9;
-      border-radius: 14px;
-      background: #fff;
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
-      text-align: center;
-    }
-
-    .logo {
-      font-size: 26px;
+    .main-logo {
+      font-size: 32px;
       font-weight: 900;
       color: #2d8653;
-      margin-bottom: 10px;
+      margin-bottom: 40px;
     }
 
-    .b2b-title {
-      font-size: 20px;
+    .container {
+      display: flex;
+      gap: 24px;
+      width: 100%;
+      max-width: 900px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .card {
+      flex: 1;
+      min-width: 320px;
+      max-width: 420px;
+      padding: 32px 24px;
+      border: 1px solid #e7ece9;
+      border-radius: 20px;
+      background: #fff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-title {
+      font-size: 22px;
       font-weight: 800;
+      margin-bottom: 12px;
       color: #1a1a1a;
-      margin-bottom: 8px;
     }
 
-    .b2b-desc {
-      font-size: 14px;
+    .card-desc {
+      font-size: 15px;
       color: #666;
       line-height: 1.6;
-      margin-bottom: 18px;
+      margin-bottom: 24px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .b2b-btn {
+    .btn {
       display: inline-block;
       width: 100%;
-      padding: 13px 16px;
-      border-radius: 10px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 700;
+      transition: background 0.2s ease;
+    }
+
+    /* B2B 스타일 (기존 초록색 유지) */
+    .btn-b2b {
       background: #2d8653;
       color: #fff;
-      text-decoration: none;
-      font-size: 15px;
-      font-weight: 700;
-      transition: background 0.2s ease, transform 0.2s ease;
     }
-
-    .b2b-btn:hover {
+    .btn-b2b:hover {
       background: #236b42;
-      transform: translateY(-1px);
     }
 
-    .note {
-      margin-top: 12px;
-      font-size: 12px;
+    /* B2C 스타일 (차별화를 위해 약간 다른 톤 혹은 같은 톤 유지 가능) */
+    .btn-b2c {
+      background: #4a90e2;
+      color: #fff;
+    }
+    .btn-b2c:hover {
+      background: #357abd;
+    }
+
+    .footer-note {
+      margin-top: 40px;
+      font-size: 13px;
       color: #999;
     }
   </style>
 </head>
 <body>
-  <div class="b2b-link-box">
-    <div class="logo">댕큐!</div>
-    <p class="b2b-title">댕큐! B2B 홈페이지</p>
-    <p class="b2b-desc">기업 전용 펫푸드 데이터 분석 플랫폼으로 이동합니다.</p>
+  <div class="main-logo">댕큐! (DangQ)</div>
 
-    <a
-      class="b2b-btn"
-      href="https://junsu2357-netizen.github.io/-Pet-Preference-Data-Platform/dangq_v10 (1).html"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      B2B 홈페이지 바로가기
-    </a>
+  <div class="container">
+    <div class="card">
+      <div class="card-title">댕큐! B2C 서비스</div>
+      <p class="card-desc">반려견을 위한 맞춤형 펫푸드 추천 및 개인화 데이터 플랫폼</p>
+      <a
+        class="btn btn-b2c"
+        href="https://junsu2357-netizen.github.io/-Pet-Preference-Data-Platform-b2c-ver/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        사용자 홈페이지 바로가기
+      </a>
+    </div>
 
-    <p class="note">* 버튼 클릭 시 새 탭에서 열립니다.</p>
-  </div>
-</body>
-</html>
+    <div class="card">
+      <div class="card-title">댕큐! B2B 솔루션</div>
+      <p class="card-desc">기업을 위한 펫 산업 시장 데이터 분석 및 비즈니스 인사이트</p>
+      <a
+        class="btn btn-b2b"
+        href="
