@@ -90,14 +90,14 @@ body {
 .scroll { flex:1; min-height: 0; overflow-y:auto; padding-bottom: 128px; -webkit-overflow-scrolling: touch; }
 .scroll::-webkit-scrollbar { display:none; }
 #s-home .scroll {
-  padding-top: 12px;
+  padding-top: 30px;
   padding-bottom: 128px;
 }
 
 /* ── TOP HEADER ── */
 .top-bar {
   background: var(--white);
-  padding: 22px 20px 0;
+  padding: 14px 20px 0;
   display: flex; justify-content: space-between; align-items: center;
 }
 .logo {
@@ -731,8 +731,13 @@ body {
 }
 .rec-back { display:flex; align-items:center; margin-bottom:14px; }
 .back-btn2 {
-  background:none; border:none; font-size:22px; cursor:pointer;
+  width: 40px;
+  height: 40px;
+  background:none; border:none; font-size:34px; cursor:pointer;
   color:var(--text2); line-height:1; padding:0; margin-right:4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 .rec-meal-kw {
   font-size:13px; color:var(--text3); text-align:center;
@@ -2284,7 +2289,7 @@ body {
   </div>
   <div class="scroll">
 
-    <section class="home-hero" id="homeHero" aria-label="요약" onclick="openMealRecords()">
+    <section class="home-hero" id="homeHero" aria-label="요약" onclick="pickMealPhoto()">
       <div class="home-hero-copy">
         <p class="hero-eyebrow">반려견 · 반려묘 기호성 기록</p>
         <h2 class="hero-title">오늘의 식사 기록하러 가기</h2>
