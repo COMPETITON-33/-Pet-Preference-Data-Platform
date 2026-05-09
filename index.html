@@ -202,12 +202,15 @@ body {
   }
 }
 @supports (-webkit-touch-callout: none) {
+  .top-bar {
+    padding-top: 4px;
+  }
   .bottom-nav {
-    bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
   }
   .scroll,
   #s-home .scroll {
-    padding-bottom: calc(194px + env(safe-area-inset-bottom, 0px));
+    padding-bottom: calc(154px + env(safe-area-inset-bottom, 0px));
   }
 }
 .nav-it {
@@ -2289,7 +2292,7 @@ body {
   </div>
   <div class="scroll">
 
-    <section class="home-hero" id="homeHero" aria-label="요약" onclick="pickMealPhoto()">
+    <section class="home-hero" id="homeHero" aria-label="요약" onclick="openMealPhotoRecord()">
       <div class="home-hero-copy">
         <p class="hero-eyebrow">반려견 · 반려묘 기호성 기록</p>
         <h2 class="hero-title">오늘의 식사 기록하러 가기</h2>
@@ -3799,6 +3802,13 @@ function pickMealPhoto() {
     var inp = document.getElementById('mealPhotoInput');
     if (inp) inp.click();
   }, 280);
+}
+
+function openMealPhotoRecord() {
+  goTo('s-record');
+  highlightNav(null);
+  var inp = document.getElementById('mealPhotoInput');
+  if (inp) inp.click();
 }
 
 function selStatus(el) {
