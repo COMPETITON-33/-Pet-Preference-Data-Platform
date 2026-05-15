@@ -70,6 +70,23 @@ body {
   box-shadow: none;
 }
 
+@media (min-width: 520px) {
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .phone {
+    width: 390px;
+    max-width: calc(100vw - 48px);
+    height: min(844px, calc(100dvh - 48px));
+    border-radius: 32px;
+    box-shadow: 0 22px 70px rgba(21, 17, 13, 0.22);
+  }
+}
+
 /* ── STATUS BAR ── */
 .status {
   background: var(--white);
@@ -97,7 +114,7 @@ body {
 /* ── TOP HEADER ── */
 .top-bar {
   background: var(--white);
-  padding: 18px 20px;
+  padding: 28px 20px 22px;
   display: flex; justify-content: space-between; align-items: center;
 }
 .logo {
@@ -105,7 +122,7 @@ body {
   font-weight: 900;
   letter-spacing: -0.6px;
   line-height: 1;
-  padding-bottom: 8px;
+  padding-bottom: 0;
   color: var(--text);
 }
 .logo span {
@@ -203,8 +220,8 @@ body {
 }
 @supports (-webkit-touch-callout: none) {
   .top-bar {
-    padding-top: 12px;
-    padding-bottom: 12px;
+    padding-top: 28px;
+    padding-bottom: 22px;
   }
   .bottom-nav {
     bottom: calc(18px + env(safe-area-inset-bottom, 0px));
@@ -867,12 +884,12 @@ body {
   display: none;
   align-items: flex-end;
   justify-content: center;
-  border-radius: 44px;
+  border-radius: inherit;
 }
 .modal-overlay.open { display: flex; }
 .modal-overlay:active { outline: none; }
 .modal-sheet {
-  width: 390px; background: var(--white); border-radius: 24px 24px 0 0;
+  width: 100%; max-width: 390px; background: var(--white); border-radius: 24px 24px 0 0;
   padding: 0 0 32px; animation: slideUp 0.28s cubic-bezier(0.34,1.2,0.64,1);
 }
 @keyframes slideUp { from{transform:translateY(100%)} to{transform:translateY(0)} }
@@ -1462,6 +1479,7 @@ body {
 .my-menu-item:last-child { border-bottom: none; }
 .my-menu-item:active { background: var(--bg); }
 .my-menu-icon { font-size: 20px; width: 32px; text-align: center; }
+.my-menu-item:first-child .my-menu-icon { transform: translateY(-2px); }
 .my-menu-txt { flex: 1; font-size: 14px; font-weight: 600; color: var(--text); letter-spacing: -0.3px; }
 .my-menu-arr { font-size: 16px; color: var(--text3); }
 
@@ -1610,6 +1628,11 @@ body {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
   position: relative;
   z-index: 1;
+}
+#s-care-feed .rp-hero-avatar {
+  align-self: flex-start;
+  object-position: center 18%;
+  transform: translateY(3px);
 }
 .rp-hero-main {
   flex: 1;
@@ -1976,7 +1999,9 @@ body {
   position: relative;
 }
 .live-video { height: 238px; position: relative; overflow: hidden; background: #121820; }
-.live-video img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.84; }
+.live-video video,
+.live-video > img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.9; }
+.live-video.is-clickable { cursor: pointer; }
 .live-video::after {
   content: "";
   position: absolute;
@@ -2002,23 +2027,13 @@ body {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.45; transform: scale(0.72); }
 }
-.live-box {
-  position: absolute; left: 78px; top: 58px; width: 178px; height: 132px;
-  border: 2px solid var(--accent); border-radius: 18px; z-index: 2;
-  box-shadow: 0 0 18px rgba(21,113,35,0.36);
-}
-.live-box-label {
-  position: absolute; left: 8px; top: -27px; padding: 4px 8px;
-  border-radius: 8px; background: rgba(21,113,35,0.95); color: #fff;
-  font-size: 11px; font-weight: 900; white-space: nowrap;
-}
 .live-overlay {
   position: absolute; left: 14px; right: 14px; bottom: 14px; z-index: 2;
   display: grid; grid-template-columns: 92px 1fr; gap: 12px; align-items: end;
 }
 .live-score {
   width: 92px; height: 92px; border-radius: 50%;
-  background: conic-gradient(var(--accent) 0 84%, rgba(255,255,255,0.18) 84% 100%);
+  background: conic-gradient(var(--accent) 0 78%, rgba(255,255,255,0.18) 78% 100%);
   display: flex; align-items: center; justify-content: center; color: #fff; position: relative;
 }
 .live-score::after {
@@ -2031,6 +2046,113 @@ body {
 .live-caption { color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,0.4); }
 .live-caption-title { font-size: 17px; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 4px; }
 .live-caption-sub { font-size: 12px; color: rgba(255,255,255,0.78); line-height: 1.45; }
+.live-controls {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  bottom: auto;
+  transform: translateY(-50%);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  pointer-events: none;
+}
+.live-control-left {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.live-control-btn {
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255,255,255,0.34);
+  border-radius: 50%;
+  background: rgba(0,0,0,0.42);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.24);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  pointer-events: auto;
+}
+.live-control-btn svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.live-control-btn .pause-icon,
+.live-control-btn .volume-icon,
+.live-control-btn .exit-icon { display: none; }
+.live-control-btn.is-playing .play-icon,
+.live-control-btn.is-muted .volume-icon,
+.live-control-btn.is-fullscreen .enter-icon { display: none; }
+.live-control-btn.is-playing .pause-icon,
+.live-control-btn.is-muted .mute-icon,
+.live-control-btn.is-fullscreen .exit-icon { display: block; }
+.live-video:fullscreen,
+.live-video:-webkit-full-screen {
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  border-radius: 0;
+}
+.live-video:fullscreen video,
+.live-video:-webkit-full-screen video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 1;
+}
+.live-video:fullscreen::after,
+.live-video:fullscreen .live-badge,
+.live-video:fullscreen .live-overlay,
+.live-video:-webkit-full-screen::after,
+.live-video:-webkit-full-screen .live-badge,
+.live-video:-webkit-full-screen .live-overlay {
+  display: none;
+}
+.live-video:fullscreen .live-controls,
+.live-video:-webkit-full-screen .live-controls {
+  left: auto;
+  right: 86px;
+  top: auto;
+  bottom: 26px;
+  transform: none;
+  flex-direction: row;
+}
+.live-video:fullscreen .live-control-btn,
+.live-video:-webkit-full-screen .live-control-btn {
+  width: 50px;
+  height: 50px;
+  background: rgba(0,0,0,0.54);
+  border-color: rgba(255,255,255,0.5);
+}
+.live-video:fullscreen .live-control-btn svg,
+.live-video:-webkit-full-screen .live-control-btn svg {
+  width: 25px;
+  height: 25px;
+}
+@media (orientation: portrait) {
+  .live-video:fullscreen video,
+  .live-video:-webkit-full-screen video {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100vh;
+    height: 100vw;
+    transform: translate(-50%, -50%) rotate(90deg);
+    transform-origin: center;
+  }
+}
 .live-panel {
   margin: 0 16px 12px; padding: 16px; border-radius: 16px;
   background: var(--white); border: 1px solid var(--border); box-shadow: var(--shadow);
@@ -2045,7 +2167,8 @@ body {
 .live-mini { padding: 13px; border-radius: 14px; background: var(--bg); border: 1px solid var(--border); }
 .live-mini-label { font-size: 11px; color: var(--text3); font-weight: 700; }
 .live-mini-val { margin-top: 5px; font-size: 18px; font-weight: 900; color: var(--text); }
-.live-comment { display: flex; gap: 10px; padding: 12px; border-radius: 14px; background: var(--accent-soft); color: var(--text2); font-size: 13px; line-height: 1.48; }
+.live-comment { display: flex; gap: 12px; padding: 12px; border-radius: 14px; background: var(--accent-soft); color: var(--text2); font-size: 13px; line-height: 1.48; }
+.live-comment span { width: 22px; flex: 0 0 22px; text-align: center; }
 .live-comment strong { color: var(--accent-dark); }
 .live-timeline { display: flex; flex-direction: column; gap: 10px; }
 .live-time-row { display: grid; grid-template-columns: 54px 1fr auto; gap: 10px; align-items: center; font-size: 12px; }
@@ -2122,6 +2245,53 @@ body {
   white-space: nowrap;
 }
 
+.past-report-summary {
+  margin: 12px 16px 10px;
+  padding: 15px;
+  border-radius: 16px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+.past-report-kicker { font-size: 11px; font-weight: 900; color: var(--accent-dark); margin-bottom: 6px; }
+.past-report-title { font-size: 18px; font-weight: 900; color: var(--text); letter-spacing: -0.5px; }
+.past-report-title strong { font-weight: 950; color: var(--accent-dark); }
+.past-report-copy { margin-top: 8px; font-size: 13px; line-height: 1.55; color: var(--text2); }
+.past-report-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 13px; }
+.past-stat { padding: 11px 7px; border-radius: 13px; background: var(--bg); text-align: center; }
+.past-stat strong { display: block; font-size: 18px; font-weight: 900; color: var(--accent-dark); line-height: 1; }
+.past-stat span { display: block; margin-top: 5px; font-size: 10px; font-weight: 800; color: var(--text3); }
+.past-section-title { margin: 18px 16px 8px; font-size: 15px; font-weight: 900; color: var(--text); letter-spacing: -0.4px; }
+.weekly-record-list { padding: 0 16px 8px; display: flex; flex-direction: column; gap: 9px; }
+.weekly-record-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 13px; box-shadow: var(--shadow); }
+.weekly-record-head { display: flex; justify-content: space-between; gap: 8px; align-items: center; margin-bottom: 10px; }
+.weekly-date { font-size: 14px; font-weight: 900; color: var(--text); }
+.weekly-score { flex-shrink: 0; padding: 5px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent-dark); font-size: 11px; font-weight: 900; }
+.weekly-meals { display: grid; grid-template-columns: 44px 1fr; gap: 6px 9px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+.weekly-meal-label { font-size: 11px; font-weight: 900; color: var(--text3); }
+.weekly-meal-text { font-size: 12px; font-weight: 700; color: var(--text2); line-height: 1.35; }
+.weekly-analysis { margin-top: 10px; display: grid; gap: 7px; }
+.weekly-analysis-row { display: grid; grid-template-columns: 76px 1fr; gap: 8px; font-size: 12px; line-height: 1.45; }
+.weekly-analysis-row strong { color: var(--accent-dark); font-weight: 900; }
+.weekly-analysis-row span { color: var(--text2); }
+.diet-flow-panel { margin: 0 16px 28px; padding: 14px; border-radius: 16px; background: var(--white); border: 1px solid var(--border); box-shadow: var(--shadow); }
+.diet-flow-list { display: flex; flex-direction: column; gap: 10px; }
+.diet-flow-item { display: grid; grid-template-columns: 88px 1fr; gap: 10px; align-items: start; }
+.diet-flow-key { font-size: 12px; font-weight: 900; color: var(--accent-dark); }
+.diet-flow-text { font-size: 12px; line-height: 1.5; color: var(--text2); }
+.summary-cart-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  font-size: 17px;
+  flex-shrink: 0;
+}
+
 
 .meal-record-list { padding: 10px 16px 24px; }
 .meal-date-group { margin-bottom: 14px; }
@@ -2150,6 +2320,23 @@ body {
 .comm-title { font-size:23px; font-weight:900; color:var(--text); letter-spacing:-0.5px; padding-bottom:0; margin-left:6px; }
 .comm-icon { width:38px; height:38px; display:flex; align-items:center; justify-content:center; cursor:pointer; }
 .comm-icon svg { width:22px; height:22px; color:var(--text2); }
+.live-analysis-hd {
+  position: relative;
+  justify-content: center;
+}
+.live-analysis-hd .back-btn2 {
+  position: absolute;
+  left: 12px;
+}
+.live-analysis-hd .comm-title {
+  margin-left: 0;
+  padding: 0 48px;
+  text-align: center;
+}
+.live-analysis-hd .comm-icon {
+  position: absolute;
+  right: 18px;
+}
 
 .search-wrap {
   background:var(--white); padding:10px 16px 12px;
@@ -2245,6 +2432,7 @@ body {
 }
 .fp-img { width:100%; height:200px; overflow:hidden; }
 .fp-img img { width:100%; height:100%; object-fit:cover; display:block; }
+.fp-img img.care-feed-photo { object-position: center 28%; }
 .fp-body { padding:10px 14px 12px; }
 .fp-txt { font-size:13px; color:var(--text); line-height:1.65; margin-bottom:7px; }
 .fp-tags { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:9px; }
@@ -2340,23 +2528,10 @@ body {
       <div class="feed-row">
         <div class="feed-thumb-wrap">
           <div class="feed-thumb-img care-pose-back">
-            <img src="dog%20image%20sample/KakaoTalk_20260509_120800807_01.jpg" alt="아침 피드의 두부 사진" onerror="this.parentElement.style.background='#C5E8D5';this.style.display='none'">
+            <img src="dog%20image%20sample/KakaoTalk_20260509_120800807_02.jpg" alt="점심 피드의 두부 사진" onerror="this.parentElement.style.background='#C5E8D5';this.style.display='none'">
           </div>
           <div class="feed-thumb-meta">
-            <div class="feed-thumb-cap">아침 사료 완식</div>
-            <div class="feed-thumb-sub">
-              <div class="feed-thumb-avatar">🐶</div>
-              <span class="feed-thumb-user">두부</span>
-              <div class="feed-thumb-likes">오늘 08:20</div>
-            </div>
-          </div>
-        </div>
-        <div class="feed-thumb-wrap">
-          <div class="feed-thumb-img care-pose-smile">
-            <img src="dog%20image%20sample/KakaoTalk_20260509_120800807_02.jpg" alt="점심 피드의 두부 사진" onerror="this.parentElement.style.background='#F5E6C0';this.style.display='none'">
-          </div>
-          <div class="feed-thumb-meta">
-            <div class="feed-thumb-cap">산책 후 컨디션 좋아요</div>
+            <div class="feed-thumb-cap">연어 오일 토핑 스페셜 사료와 불린 건당근</div>
             <div class="feed-thumb-sub">
               <div class="feed-thumb-avatar">🐶</div>
               <span class="feed-thumb-user">두부</span>
@@ -2365,15 +2540,28 @@ body {
           </div>
         </div>
         <div class="feed-thumb-wrap">
+          <div class="feed-thumb-img care-pose-smile">
+            <img src="dog%20image%20sample/KakaoTalk_20260509_120800807_01.jpg" alt="아침 피드의 두부 사진" onerror="this.parentElement.style.background='#F5E6C0';this.style.display='none'">
+          </div>
+          <div class="feed-thumb-meta">
+            <div class="feed-thumb-cap">아침으로 닭가슴살 베이스 사료</div>
+            <div class="feed-thumb-sub">
+              <div class="feed-thumb-avatar">🐶</div>
+              <span class="feed-thumb-user">두부</span>
+              <div class="feed-thumb-likes">오늘 08:20</div>
+            </div>
+          </div>
+        </div>
+        <div class="feed-thumb-wrap">
           <div class="feed-thumb-img care-pose-rest">
             <img src="dog%20image%20sample/KakaoTalk_20260509_120800807_03.jpg" alt="저녁 피드의 두부 사진" onerror="this.parentElement.style.background='#FFD6D6';this.style.display='none'">
           </div>
           <div class="feed-thumb-meta">
-            <div class="feed-thumb-cap">저녁 간식도 잘 먹었어요</div>
+            <div class="feed-thumb-cap">소고기 야채 믹스 사료 완식</div>
             <div class="feed-thumb-sub">
               <div class="feed-thumb-avatar">🐶</div>
               <span class="feed-thumb-user">두부</span>
-              <div class="feed-thumb-likes">오늘 18:10</div>
+              <div class="feed-thumb-likes">어제 18:10</div>
             </div>
           </div>
         </div>
@@ -2395,7 +2583,7 @@ body {
           </div>
           <div class="report-action-foot">열기 ›</div>
         </div>
-        <div class="report-action-card" onclick="goTo('s-care-feed'); highlightNav('n-care')">
+        <div class="report-action-card" onclick="goTo('s-past-report'); highlightNav('n-report')">
           <div class="report-action-icon">📁</div>
           <div>
             <div class="report-action-title">과거 리포트</div>
@@ -2403,7 +2591,7 @@ body {
           </div>
           <div class="report-action-foot">보기 ›</div>
         </div>
-        <div class="report-action-card" onclick="goTo('s-care-feed'); highlightNav('n-care')">
+        <div class="report-action-card" onclick="goTo('s-report-summary'); highlightNav('n-report')">
           <div class="report-action-icon">📌</div>
           <div>
             <div class="report-action-title">리포트 요약</div>
@@ -2424,16 +2612,16 @@ body {
             <circle class="ring-prog" id="homeRing" cx="29" cy="29" r="25"/>
           </svg>
           <div class="ring-center">
-            <div class="ring-pct">33%</div>
+            <div class="ring-pct">67%</div>
             <div class="ring-lbl">완료</div>
           </div>
         </div>
         <div class="today-body">
           <div class="today-title">두부의 오늘</div>
-          <div class="today-sub">3번 중 1번 식사 완료</div>
+          <div class="today-sub">3번 중 2번 식사 완료</div>
           <div class="chip-row">
             <span class="chip done">아침 ✓</span>
-            <span class="chip">점심 대기</span>
+            <span class="chip done">점심 ✓</span>
             <span class="chip">저녁 예정</span>
           </div>
         </div>
@@ -2483,7 +2671,7 @@ body {
      MEAL RECORDS
 ══════════════════════════════════════ -->
 <div id="s-meal-records" class="screen" style="background:var(--bg);">
-  <div class="comm-hd" style="border-bottom:1px solid var(--border);">
+  <div class="comm-hd live-analysis-hd" style="border-bottom:1px solid var(--border);">
     <button type="button" class="back-btn2" onclick="goBack()" aria-label="이전 화면으로 돌아가기">‹</button>
     <div class="comm-title">식사 기록</div>
     <div class="comm-icon" aria-hidden="true">🍽️</div>
@@ -2495,7 +2683,7 @@ body {
      POPULAR FEED COLLECTION
 ══════════════════════════════════════ -->
 <div id="s-popular-feed" class="screen" style="background:var(--bg);">
-  <div class="comm-hd" style="border-bottom:1px solid var(--border);">
+  <div class="comm-hd live-analysis-hd" style="border-bottom:1px solid var(--border);">
     <button type="button" class="back-btn2" onclick="goBack()" aria-label="홈으로 돌아가기">‹</button>
     <div class="comm-title">실시간 인기 피드</div>
     <div class="comm-icon" aria-hidden="true">🔥</div>
@@ -2543,7 +2731,7 @@ body {
         <div class="rp-hero-score" title="식사 완료율">
           <span class="rp-hero-num">85</span><span class="rp-hero-pct">%</span>
         </div>
-        <p class="rp-hero-caption">이번 주 완식률 · 지난주 대비 <strong>+15%p</strong></p>
+        <p class="rp-hero-caption">지난주 대비<br><strong>이번주 완식률 +10%p</strong></p>
       </div>
       <div class="rp-hero-badge" id="careTrendBadge">추세 ↑</div>
     </section>
@@ -2552,7 +2740,7 @@ body {
       <div class="rp-kpi" onclick="openMealRecords()"><div class="rp-kpi-label">총 기록</div><div class="rp-kpi-val"><span id="careTotalRecords">0</span><span class="unit">회</span></div><div class="rp-kpi-sub">식사 로그 누적</div></div>
       <div class="rp-kpi"><div class="rp-kpi-label">사진 첨부율</div><div class="rp-kpi-val"><span id="carePhotoRate">0</span><span class="unit">%</span></div><div class="rp-kpi-sub">이번달 첨부 기준</div></div>
       <div class="rp-kpi"><div class="rp-kpi-label">평균 식사 시간</div><div class="rp-kpi-val"><span id="careAvgMealTime">0</span><span class="unit">분</span></div><div class="rp-kpi-sub" id="careAvgDiff">전주 대비 0분</div></div>
-      <div class="rp-kpi"><div class="rp-kpi-label">연속 기록</div><div class="rp-kpi-val"><span id="careStreakDays">0</span><span class="unit">일</span></div><div class="rp-kpi-sub" id="careStreakText">지금 기록하러 가기</div></div>
+      <div class="rp-kpi"><div class="rp-kpi-label">연속 기록</div><div class="rp-kpi-val"><span id="careStreakDays">2</span><span class="unit">일</span></div><div class="rp-kpi-sub" id="careStreakText">금·토 연속 기록</div></div>
     </div>
 
     <section class="rp-panel" aria-label="시간대별 패턴">
@@ -2563,23 +2751,23 @@ body {
       <div class="rp-slot">
         <div class="rp-slot-head">
           <span class="rp-slot-name">아침</span>
-          <span class="rp-slot-pct">88%</span>
+          <span class="rp-slot-pct">64%</span>
         </div>
-        <div class="rp-slot-track"><div class="rp-slot-fill" style="width:88%;"></div></div>
+        <div class="rp-slot-track"><div class="rp-slot-fill" style="width:64%;"></div></div>
       </div>
       <div class="rp-slot">
         <div class="rp-slot-head">
           <span class="rp-slot-name">점심</span>
-          <span class="rp-slot-pct">71%</span>
+          <span class="rp-slot-pct">58%</span>
         </div>
-        <div class="rp-slot-track"><div class="rp-slot-fill" style="width:71%;"></div></div>
+        <div class="rp-slot-track"><div class="rp-slot-fill" style="width:58%;"></div></div>
       </div>
       <div class="rp-slot">
         <div class="rp-slot-head">
           <span class="rp-slot-name">저녁</span>
-          <span class="rp-slot-pct">94%</span>
+          <span class="rp-slot-pct">76%</span>
         </div>
-        <div class="rp-slot-track"><div class="rp-slot-fill" style="width:94%;"></div></div>
+        <div class="rp-slot-track"><div class="rp-slot-fill" style="width:76%;"></div></div>
       </div>
     </section>
     <section class="rp-panel care-feed-panel" aria-label="마이 케어 피드">
@@ -2587,47 +2775,6 @@ body {
       <div id="careFeedPreview"></div>
     </section>
 
-    <section class="rp-panel" id="reportPreferenceSummary" aria-label="선호 식단">
-      <h3 class="rp-panel-title">
-        선호 식단 TOP 3
-        <span class="rp-panel-note">기호성 점수 상위</span>
-      </h3>
-      <div class="rp-rank-list">
-        <div class="rp-rank-row rp-rank-row--1">
-          <div class="rp-rk-medal" aria-hidden="true">🥇</div>
-          <div class="rp-rk-img">
-            <img src="https://images.unsplash.com/photo-1615361200141-f45040f367be?w=100&q=80&fit=crop" alt="" onerror="this.parentElement.style.background='#C5E8D5';this.style.display='none'">
-          </div>
-          <div class="rp-rk-body">
-            <div class="rp-rk-name">연어 오일 토핑 스페셜</div>
-            <div class="rp-rk-meta">완료 비율 높음 · 메모 6건</div>
-          </div>
-          <div class="rp-rk-score">92<span>%</span></div>
-        </div>
-        <div class="rp-rank-row rp-rank-row--2">
-          <div class="rp-rk-medal" aria-hidden="true">🥈</div>
-          <div class="rp-rk-img">
-            <img src="https://images.unsplash.com/photo-1604503468506-a8da13d82791?w=100&q=80&fit=crop" alt="" onerror="this.parentElement.style.background='#FFF3D6';this.style.display='none'">
-          </div>
-          <div class="rp-rk-body">
-            <div class="rp-rk-name">닭가슴살 사료 + 산양유</div>
-            <div class="rp-rk-meta">안정적 반응 · 사진 4장</div>
-          </div>
-          <div class="rp-rk-score">85<span>%</span></div>
-        </div>
-        <div class="rp-rank-row rp-rank-row--3">
-          <div class="rp-rk-medal" aria-hidden="true">🥉</div>
-          <div class="rp-rk-img">
-            <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=100&q=80&fit=crop" alt="" onerror="this.parentElement.style.background='#FFD6D6';this.style.display='none'">
-          </div>
-          <div class="rp-rk-body">
-            <div class="rp-rk-name">소고기 야채 믹스</div>
-            <div class="rp-rk-meta">가끔 일부 남김</div>
-          </div>
-          <div class="rp-rk-score">78<span>%</span></div>
-        </div>
-      </div>
-    </section>
   </div>
 </div>
 
@@ -2662,7 +2809,7 @@ body {
         </div>
         <div class="report-action-foot">열기 ›</div>
       </div>
-      <div class="report-action-card" onclick="goTo('s-care-feed'); highlightNav('n-care')">
+      <div class="report-action-card" onclick="goTo('s-past-report'); highlightNav('n-report')">
         <div class="report-action-icon">📁</div>
         <div>
           <div class="report-action-title">과거 리포트</div>
@@ -2670,7 +2817,7 @@ body {
         </div>
         <div class="report-action-foot">보기 ›</div>
       </div>
-      <div class="report-action-card" onclick="goTo('s-care-feed'); highlightNav('n-care')">
+        <div class="report-action-card" onclick="goTo('s-report-summary'); highlightNav('n-report')">
         <div class="report-action-icon">📌</div>
         <div>
           <div class="report-action-title">리포트 요약</div>
@@ -2679,6 +2826,162 @@ body {
         <div class="report-action-foot">요약 ›</div>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     REPORT SUMMARY
+══════════════════════════════════════ -->
+<div id="s-report-summary" class="screen" style="background:var(--bg);">
+  <div class="status">
+    <span class="status-clock">9:41</span>
+    <div class="status-r">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
+    </div>
+  </div>
+  <div class="comm-hd live-analysis-hd" style="border-bottom:1px solid var(--border);">
+    <button type="button" class="back-btn2" onclick="goBack()" aria-label="리포트로 돌아가기">‹</button>
+    <div class="comm-title">리포트 요약</div>
+    <div class="comm-icon" aria-hidden="true">📌</div>
+  </div>
+  <div class="scroll">
+    <section class="rp-panel">
+      <h3 class="rp-panel-title">완식률 <span class="rp-panel-note">최근 7일</span></h3>
+      <div class="rp-kpi-val" style="margin-bottom:12px;"><span>80</span><span class="unit">%</span></div>
+      <div class="rp-kpi-sub" style="margin-top:-8px;margin-bottom:12px;">주간 완식률 80%</div>
+      <div class="rp-line-wrap">
+        <div class="rp-chart-y"><span class="rp-cy">100</span><span class="rp-cy">75</span><span class="rp-cy">50</span></div>
+        <svg viewBox="0 0 260 92" aria-label="주간 완식률 그래프">
+          <polyline points="34,58 68,64 102,28 136,70 170,34 204,42 238,20" fill="none" stroke="#157123" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <g fill="#157123">
+            <circle cx="34" cy="58" r="4"/><circle cx="68" cy="64" r="4"/><circle cx="102" cy="28" r="4"/><circle cx="136" cy="70" r="4"/><circle cx="170" cy="34" r="4"/><circle cx="204" cy="42" r="4"/><circle cx="238" cy="20" r="4"/>
+          </g>
+        </svg>
+      </div>
+      <div class="rp-chart-labels"><span class="rp-clb">월</span><span class="rp-clb">화</span><span class="rp-clb">수</span><span class="rp-clb">목</span><span class="rp-clb">금</span><span class="rp-clb">토</span><span class="rp-clb">일</span></div>
+    </section>
+
+    <section class="rp-panel">
+      <h3 class="rp-panel-title">시간대 패턴 <span class="rp-panel-note">아침 · 점심 · 저녁</span></h3>
+      <div class="weekly-analysis">
+        <div class="weekly-analysis-row"><strong>아침</strong><span>닭가슴살 베이스 사료처럼 익숙한 향에는 접근이 빠르고 완식률이 안정적입니다.</span></div>
+        <div class="weekly-analysis-row"><strong>점심</strong><span>연어 오일 토핑 스페셜 사료와 불린 건당근 조합에서 섭취 속도와 집중도가 가장 좋습니다.</span></div>
+        <div class="weekly-analysis-row"><strong>저녁</strong><span>습식 사료나 단호박을 더하면 긴 식사 시간에도 이탈이 줄어듭니다.</span></div>
+      </div>
+    </section>
+
+    <section class="rp-panel">
+      <h3 class="rp-panel-title">선호식단 TOP 3 <span class="rp-panel-note">주간 기록 기반</span></h3>
+      <div class="rp-rank-list">
+        <div class="rp-rank-row rp-rank-row--1">
+          <div class="rp-rk-medal" aria-hidden="true">🥇</div>
+          <div class="rp-rk-body"><div class="rp-rk-name">연어 오일 토핑 스페셜 사료 + 불린 건당근</div><div class="rp-rk-meta">토요일 점심 · 기호성 88%</div></div>
+          <div class="summary-cart-icon" aria-hidden="true">🛒</div>
+        </div>
+        <div class="rp-rank-row rp-rank-row--2">
+          <div class="rp-rk-medal" aria-hidden="true">🥈</div>
+          <div class="rp-rk-body"><div class="rp-rk-name">닭가슴살 베이스 사료 + 습식 파우치</div><div class="rp-rk-meta">금요일 저녁 · 기호성 79%</div></div>
+          <div class="summary-cart-icon" aria-hidden="true">🛒</div>
+        </div>
+        <div class="rp-rank-row rp-rank-row--3">
+          <div class="rp-rk-medal" aria-hidden="true">🥉</div>
+          <div class="rp-rk-body"><div class="rp-rk-name">연어 오일 토핑 스페셜 사료 + 단호박</div><div class="rp-rk-meta">수요일 아침 · 기호성 74%</div></div>
+          <div class="summary-cart-icon" aria-hidden="true">🛒</div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAST REPORT
+══════════════════════════════════════ -->
+<div id="s-past-report" class="screen" style="background:var(--bg);">
+  <div class="status">
+    <span class="status-clock">9:41</span>
+    <div class="status-r">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
+    </div>
+  </div>
+  <div class="comm-hd live-analysis-hd" style="border-bottom:1px solid var(--border);">
+    <button type="button" class="back-btn2" onclick="goBack()" aria-label="리포트로 돌아가기">‹</button>
+    <div class="comm-title">과거 리포트</div>
+    <div class="comm-icon" aria-hidden="true">📁</div>
+  </div>
+  <div class="scroll">
+    <section class="past-report-summary">
+      <div class="past-report-kicker">이번 주 · 두부</div>
+      <div class="past-report-title"><strong>연어 오일 토핑 스페셜 사료</strong>와 불린 건당근 조합이 가장 선호도가 높습니다.</div>
+      <div class="past-report-copy">식단 기록과 영상 기호성 분석을 함께 보면, 두부는 생채소와 오트밀 현미 건식 사료보다 연어 오일, 닭가슴살 베이스, 단호박, 습식 사료 조합에서 안정적으로 반응했습니다.</div>
+      <div class="past-report-stats">
+        <div class="past-stat"><strong>80%</strong><span>주간 완식률</span></div>
+        <div class="past-stat"><strong>8g/분</strong><span>평균 섭취 속도</span></div>
+        <div class="past-stat"><strong>+10</strong><span>선호 점수 변화</span></div>
+      </div>
+    </section>
+
+    <div class="past-section-title">주간 식단 기록</div>
+    <div class="weekly-record-list">
+      <article class="weekly-record-card">
+        <div class="weekly-record-head"><div class="weekly-date">5월 9일 토요일</div><div class="weekly-score">기호성 88%</div></div>
+        <div class="weekly-meals">
+          <div class="weekly-meal-label">아침</div><div class="weekly-meal-text">닭가슴살 베이스 사료 + 미온수</div>
+          <div class="weekly-meal-label">점심</div><div class="weekly-meal-text">연어 오일 토핑 스페셜 사료 + 불린 건당근</div>
+          <div class="weekly-meal-label">저녁</div><div class="weekly-meal-text">소고기 야채 믹스 사료 + 습식 사료</div>
+        </div>
+        <div class="weekly-analysis">
+          <div class="weekly-analysis-row"><strong>섭취 지속성</strong><span>연어 오일과 불린 건당근 조합에서 접근이 빠르고 점심 섭취 집중도가 가장 높았습니다.</span></div>
+          <div class="weekly-analysis-row"><strong>행동 분석</strong><span>첫 접근 3.2초, 평균 섭취 속도 8g/분. 완식 예측율 82%.</span></div>
+        </div>
+      </article>
+      <article class="weekly-record-card">
+        <div class="weekly-record-head"><div class="weekly-date">5월 8일 금요일</div><div class="weekly-score">기호성 79%</div></div>
+        <div class="weekly-meals">
+          <div class="weekly-meal-label">아침</div><div class="weekly-meal-text">단호박 + 닭가슴살 베이스 사료</div>
+          <div class="weekly-meal-label">점심</div><div class="weekly-meal-text">불린 건애호박 토핑 + 습식 사료</div>
+          <div class="weekly-meal-label">저녁</div><div class="weekly-meal-text">닭가슴살 베이스 사료 + 습식 파우치</div>
+        </div>
+        <div class="weekly-analysis">
+          <div class="weekly-analysis-row"><strong>섭취 지속성</strong><span>습식 사료가 들어간 저녁에 씹는 리듬이 일정했고 고개 이탈이 줄었습니다.</span></div>
+          <div class="weekly-analysis-row"><strong>행동 분석</strong><span>딱딱한 식감이 줄어들면서 재접근 시간이 짧아졌습니다.</span></div>
+        </div>
+      </article>
+      <article class="weekly-record-card">
+        <div class="weekly-record-head"><div class="weekly-date">5월 6일 수요일</div><div class="weekly-score">기호성 74%</div></div>
+        <div class="weekly-meals">
+          <div class="weekly-meal-label">아침</div><div class="weekly-meal-text">연어 오일 토핑 스페셜 사료 + 단호박</div>
+          <div class="weekly-meal-label">점심</div><div class="weekly-meal-text">닭가슴살 베이스 사료 + 불린 건브로콜리 토핑</div>
+          <div class="weekly-meal-label">저녁</div><div class="weekly-meal-text">습식 사료 + 북어가루</div>
+        </div>
+        <div class="weekly-analysis">
+          <div class="weekly-analysis-row"><strong>섭취 지속성</strong><span>연어 오일 토핑 스페셜 사료가 들어간 아침은 70% 이상 반응을 유지했습니다.</span></div>
+          <div class="weekly-analysis-row"><strong>행동 분석</strong><span>단호박이 들어간 구간에서 미간 긴장도가 낮고 섭취 속도가 안정적이었습니다.</span></div>
+        </div>
+      </article>
+      <article class="weekly-record-card">
+        <div class="weekly-record-head"><div class="weekly-date">5월 4일 월요일</div><div class="weekly-score">기호성 55%</div></div>
+        <div class="weekly-meals">
+          <div class="weekly-meal-label">아침</div><div class="weekly-meal-text">양고기 베이스 사료 + 고구마 토핑</div>
+          <div class="weekly-meal-label">점심</div><div class="weekly-meal-text">오트밀 현미 건식 사료</div>
+          <div class="weekly-meal-label">저녁</div><div class="weekly-meal-text">생오이 토핑 + 옥수수 건식 사료</div>
+        </div>
+        <div class="weekly-analysis">
+          <div class="weekly-analysis-row"><strong>섭취 지속성</strong><span>연어 오일 토핑이 없는 날은 접근 후 이탈이 많아 기호성이 55%에 머물렀습니다.</span></div>
+          <div class="weekly-analysis-row"><strong>행동 분석</strong><span>딱딱한 식감과 오트밀 현미 사료 구간에서 먹는 속도가 느려졌습니다.</span></div>
+        </div>
+      </article>
+    </div>
+
+    <div class="past-section-title">선호 식단 흐름</div>
+    <section class="diet-flow-panel">
+      <div class="diet-flow-list">
+        <div class="diet-flow-item"><div class="diet-flow-key">가장 선호</div><div class="diet-flow-text">연어 오일 토핑 스페셜 사료와 불린 건당근 조합에서 섭취 지속성과 완식률이 가장 높았습니다.</div></div>
+        <div class="diet-flow-item"><div class="diet-flow-key">낮은 반응</div><div class="diet-flow-text">양고기 베이스 사료와 고구마 토핑은 접근은 하지만 중간 이탈이 많아 기호성 점수가 낮게 나왔습니다.</div></div>
+        <div class="diet-flow-item"><div class="diet-flow-key">추천 흐름</div><div class="diet-flow-text">연어 오일 토핑 스페셜 사료는 점심이나 아침에 배치하고, 저녁에는 닭가슴살 베이스 사료에 습식 사료나 단호박을 더하는 흐름이 적합합니다.</div></div>
+      </div>
+    </section>
   </div>
 </div>
 
@@ -2693,40 +2996,57 @@ body {
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
     </div>
   </div>
-  <div class="comm-hd" style="border-bottom:1px solid var(--border);">
+  <div class="comm-hd live-analysis-hd" style="border-bottom:1px solid var(--border);">
     <button type="button" class="back-btn2" onclick="goBack()" aria-label="홈으로 돌아가기">‹</button>
     <div class="comm-title">실시간 기호성 분석</div>
     <div class="comm-icon" aria-hidden="true">📹</div>
   </div>
   <div class="scroll">
     <section class="live-hero" aria-label="실시간 영상 분석">
-      <div class="live-video">
-        <img src="dog%20image%20sample/KakaoTalk_20260507_144846769_03.jpg" alt="두부 급여 영상 분석 화면" onerror="this.style.background='#121820';this.style.height='238px'">
+      <div class="live-video is-clickable" role="button" tabindex="0" onclick="openLiveVideoFullscreen()" onkeydown="handleLiveVideoKey(event)" aria-label="실시간 기호성 분석 영상을 전체 화면으로 보기">
+        <video src="앱용영상.mp4" poster="실시간 기호성 분석.png" autoplay muted loop playsinline aria-label="실시간 기호성 분석 영상">
+          <img src="실시간 기호성 분석.png" alt="실시간 기호성 분석 영상 미리보기">
+        </video>
         <div class="live-badge">LIVE ANALYSIS</div>
-        <div class="live-box"><div class="live-box-label">Dubu · eating detected</div></div>
         <div class="live-overlay">
-          <div class="live-score"><span>84</span><small>%</small></div>
+          <div class="live-score"><span>78</span><small>%</small></div>
           <div class="live-caption">
             <div class="live-caption-title">기호성 점수 높음</div>
             <div class="live-caption-sub">접근 속도와 섭취 지속 시간이 안정적으로 감지되고 있어요.</div>
           </div>
         </div>
+        <div class="live-controls" aria-label="영상 컨트롤">
+          <div class="live-control-left">
+            <button type="button" class="live-control-btn is-playing" id="livePlayBtn" onclick="toggleLiveVideoPlayback(event)" aria-label="재생 또는 일시정지">
+              <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              <svg class="pause-icon" viewBox="0 0 24 24"><path d="M8 5v14"/><path d="M16 5v14"/></svg>
+            </button>
+            <button type="button" class="live-control-btn is-muted" id="liveMuteBtn" onclick="toggleLiveVideoMute(event)" aria-label="소리 켜기 또는 끄기">
+              <svg class="volume-icon" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 9.5a4 4 0 0 1 0 5"/><path d="M18.5 7a8 8 0 0 1 0 10"/></svg>
+              <svg class="mute-icon" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M18 9l-5 5"/><path d="M13 9l5 5"/></svg>
+            </button>
+          </div>
+          <button type="button" class="live-control-btn" id="liveFullscreenBtn" onclick="toggleLiveVideoFullscreen(event)" aria-label="전체화면 전환">
+            <svg class="enter-icon" viewBox="0 0 24 24"><path d="M8 3H3v5"/><path d="M3 3l6 6"/><path d="M16 3h5v5"/><path d="M21 3l-6 6"/><path d="M8 21H3v-5"/><path d="M3 21l6-6"/><path d="M16 21h5v-5"/><path d="M21 21l-6-6"/></svg>
+            <svg class="exit-icon" viewBox="0 0 24 24"><path d="M9 3v6H3"/><path d="M3 9l6-6"/><path d="M15 3v6h6"/><path d="M21 9l-6-6"/><path d="M9 21v-6H3"/><path d="M3 15l6 6"/><path d="M15 21v-6h6"/><path d="M21 15l-6 6"/></svg>
+          </button>
+        </div>
       </div>
     </section>
 
     <section class="live-panel">
-      <div class="live-panel-title">실시간 지표</div>
+      <div class="live-panel-title">분석 현황</div>
       <div class="live-metric">
-        <div class="live-metric-head"><span>접근 관심도</span><strong>91%</strong></div>
-        <div class="live-track"><div class="live-fill" style="width:91%;"></div></div>
+        <div class="live-metric-head"><span>접근 관심도</span><strong>85%</strong></div>
+        <div class="live-track"><div class="live-fill" style="width:85%;"></div></div>
       </div>
       <div class="live-metric">
-        <div class="live-metric-head"><span>섭취 지속성</span><strong>84%</strong></div>
-        <div class="live-track"><div class="live-fill" style="width:84%;"></div></div>
+        <div class="live-metric-head"><span>섭취 지속성</span><strong>68%</strong></div>
+        <div class="live-track"><div class="live-fill" style="width:68%;"></div></div>
       </div>
       <div class="live-metric">
-        <div class="live-metric-head"><span>이탈 가능성</span><strong>12%</strong></div>
-        <div class="live-track"><div class="live-fill" style="width:12%; background:linear-gradient(90deg,#ffb74d,#efa201);"></div></div>
+        <div class="live-metric-head"><span>사료 만족도</span><strong>73%</strong></div>
+        <div class="live-track"><div class="live-fill" style="width:73%;"></div></div>
       </div>
     </section>
 
@@ -2734,9 +3054,9 @@ body {
       <div class="live-panel-title">행동 분석</div>
       <div class="live-grid">
         <div class="live-mini"><div class="live-mini-label">첫 접근</div><div class="live-mini-val">3.2초</div></div>
-        <div class="live-mini"><div class="live-mini-label">머문 시간</div><div class="live-mini-val">01:48</div></div>
+        <div class="live-mini"><div class="live-mini-label">평균 섭취 속도</div><div class="live-mini-val">8g/분</div></div>
         <div class="live-mini"><div class="live-mini-label">고개 이탈</div><div class="live-mini-val">2회</div></div>
-        <div class="live-mini"><div class="live-mini-label">완식 예측</div><div class="live-mini-val">높음</div></div>
+        <div class="live-mini"><div class="live-mini-label">완식 예측율</div><div class="live-mini-val">75%</div></div>
       </div>
     </section>
 
@@ -2744,17 +3064,20 @@ body {
       <div class="live-panel-title">AI 코멘트</div>
       <div class="live-comment">
         <span aria-hidden="true">🤖</span>
-        <div><strong>두부가 현재 급여에 긍정적으로 반응 중입니다.</strong><br>초반 접근이 빠르고 섭취 중 멈춤이 적어, 오늘 조합은 기호성이 높은 편으로 판단돼요.</div>
+        <div><strong>두부가 사료에 높은 기호성을 보입니다.</strong><br>초반 접근은 3.2초로 빠르게 감지되어 사료 인지와 관심도가 높은 편입니다.<br>평균 섭취 속도는 8g/분으로 일반적인 소형견 사료 섭취 속도 범위 안에서 안정적입니다.<br>섭취 중 집중도는 68%로 중간 이탈은 있으나 재접근 흐름이 유지됩니다.<br>귀와 미간 움직임이 과도하게 긴장되지 않아 현재 사료 만족도는 73%로 판단됩니다.</div>
       </div>
     </section>
 
     <section class="live-panel">
       <div class="live-panel-title">분석 타임라인</div>
       <div class="live-timeline">
-        <div class="live-time-row"><span class="live-time">00:03</span><span class="live-event">사료 냄새 탐색 시작</span><span class="live-event-score">+12</span></div>
-        <div class="live-time-row"><span class="live-time">00:11</span><span class="live-event">첫 섭취 감지</span><span class="live-event-score">+28</span></div>
-        <div class="live-time-row"><span class="live-time">00:42</span><span class="live-event">연속 섭취 유지</span><span class="live-event-score">+31</span></div>
-        <div class="live-time-row"><span class="live-time">01:18</span><span class="live-event">짧은 이탈 후 재접근</span><span class="live-event-score">+13</span></div>
+        <div class="live-time-row"><span class="live-time">00:03</span><span class="live-event">사료 냄새 탐색 시작</span><span class="live-event-score">+10</span></div>
+        <div class="live-time-row"><span class="live-time">00:28</span><span class="live-event">첫 섭취 감지, 접근 관심도 상승</span><span class="live-event-score">+18</span></div>
+        <div class="live-time-row"><span class="live-time">01:07</span><span class="live-event">일정한 씹기 리듬 유지</span><span class="live-event-score">+16</span></div>
+        <div class="live-time-row"><span class="live-time">02:14</span><span class="live-event">짧은 고개 이탈 후 재접근</span><span class="live-event-score">+9</span></div>
+        <div class="live-time-row"><span class="live-time">03:02</span><span class="live-event">섭취 속도 안정 구간 진입</span><span class="live-event-score">+12</span></div>
+        <div class="live-time-row"><span class="live-time">04:19</span><span class="live-event">귀와 미간 긴장도 낮게 유지</span><span class="live-event-score">+8</span></div>
+        <div class="live-time-row"><span class="live-time">05:36</span><span class="live-event">마지막 섭취 반응 확인, 기호성 높음</span><span class="live-event-score">+12</span></div>
       </div>
     </section>
   </div>
@@ -2865,7 +3188,7 @@ body {
         </div>
         <div class="report-action-foot">열기 ›</div>
       </div>
-      <div class="report-action-card" onclick="goTo('s-care-feed'); highlightNav('n-care')">
+      <div class="report-action-card" onclick="goTo('s-past-report'); highlightNav('n-report')">
         <div class="report-action-icon">📁</div>
         <div>
           <div class="report-action-title">과거 리포트</div>
@@ -2873,7 +3196,7 @@ body {
         </div>
         <div class="report-action-foot">보기 ›</div>
       </div>
-      <div class="report-action-card" onclick="goTo('s-care-feed'); highlightNav('n-care')">
+        <div class="report-action-card" onclick="goTo('s-report-summary'); highlightNav('n-report')">
         <div class="report-action-icon">📌</div>
         <div>
           <div class="report-action-title">리포트 요약</div>
@@ -3292,12 +3615,12 @@ body {
         </div>
         <div class="cart-entry-arrow">›</div>
       </div>
-      <div class="prod-sec-title" style="padding-left: 0; padding-right: 0;">자주 함께 담는 상품</div>
+      <div class="prod-sec-title" style="padding-left: 0; padding-right: 0;">자주 구매하는 상품</div>
       <div class="prod-card" style="margin-left: 0; margin-right: 0;" onclick="showToast('상품 상세')">
-        <div class="prod-thumb">🍖</div>
+        <div class="prod-thumb">🥒</div>
         <div class="prod-info">
-          <div class="prod-name">닭가슴살 베이스 사료 2kg</div>
-          <div class="prod-desc">저알러지 · 전연령 · 강아지</div>
+          <div class="prod-name">건조 애호박</div>
+          <div class="prod-desc">불려서 급여 · 부드러운 채소 토핑</div>
           <div class="prod-price-row">
             <span class="prod-price">42,000원</span>
             <span class="prod-og">49,000원</span>
@@ -3309,8 +3632,8 @@ body {
       <div class="prod-card" style="margin-left: 0; margin-right: 0;" onclick="showToast('상품 상세')">
         <div class="prod-thumb">🐟</div>
         <div class="prod-info">
-          <div class="prod-name">연어 오일 토핑</div>
-          <div class="prod-desc">오메가3 · 강아지·고양이</div>
+          <div class="prod-name">연어 오일</div>
+          <div class="prod-desc">기호성 보강 · 윤기 케어 토핑</div>
           <div class="prod-price-row">
             <span class="prod-price">18,500원</span>
             <span class="prod-ver">재구매 많음</span>
@@ -3322,7 +3645,7 @@ body {
         <div class="prod-thumb">🥛</div>
         <div class="prod-info">
           <div class="prod-name">산양유 파우더</div>
-          <div class="prod-desc">분유 대체 · 고양이 추천</div>
+          <div class="prod-desc">부드러운 풍미 · 식사 토핑용</div>
           <div class="prod-price-row">
             <span class="prod-price">24,900원</span>
           </div>
@@ -3332,7 +3655,7 @@ body {
     </div>
 
     <div class="my-menu-card">
-      <div class="my-menu-item" onclick="goTo('s-care-feed'); highlightNav('n-care');"><span class="my-menu-icon">📊</span><span class="my-menu-txt">식사 리포트</span><span class="my-menu-arr">›</span></div>
+      <div class="my-menu-item" onclick="showToast('이용 가이드')"><span class="my-menu-icon">📘</span><span class="my-menu-txt">이용 가이드</span><span class="my-menu-arr">›</span></div>
       <div class="my-menu-item" onclick="showToast('구독 관리')"><span class="my-menu-icon">📦</span><span class="my-menu-txt">정기 배송</span><span class="my-menu-arr">›</span></div>
       <div class="my-menu-item" onclick="showToast('고객센터')"><span class="my-menu-icon">💬</span><span class="my-menu-txt">문의하기</span><span class="my-menu-arr">›</span></div>
     </div>
@@ -3407,6 +3730,8 @@ const navMap = {
   's-popular-feed': 'n-home',
   's-feed-detail': 'n-home',
   's-report-hub': 'n-home',
+  's-report-summary': 'n-report',
+  's-past-report': 'n-report',
   's-live-analysis': 'n-home',
   's-record': null,
   's-report': 'n-report',
@@ -3422,20 +3747,20 @@ let screenHistory = [];
 let isHistoryBack = false;
 const storeProducts = {
   food: {
-    name: '닭가슴살 베이스 사료 2kg',
-    desc: '저알러지 · 전연령 · 강아지',
+    name: '건조 애호박',
+    desc: '불려서 급여 · 부드러운 채소 토핑',
     price: 42000,
-    icon: '🍖'
+    icon: '🥒'
   },
   salmon: {
-    name: '연어 오일 토핑',
-    desc: '오메가3 · 강아지·고양이',
+    name: '연어 오일',
+    desc: '기호성 보강 · 윤기 케어 토핑',
     price: 18500,
     icon: '🐟'
   },
   milk: {
     name: '산양유 파우더',
-    desc: '분유 대체 · 고양이 추천',
+    desc: '부드러운 풍미 · 식사 토핑용',
     price: 24900,
     icon: '🥛'
   }
@@ -3443,12 +3768,116 @@ const storeProducts = {
 let cartItems = [];
 let checkoutBackScreen = 's-preference-kit';
 
+function handleLiveVideoKey(event) {
+  if (event.key !== 'Enter' && event.key !== ' ') return;
+  event.preventDefault();
+  openLiveVideoFullscreen();
+}
+
+function getLiveVideoElements() {
+  const frame = document.querySelector('#s-live-analysis .live-video');
+  const video = frame ? frame.querySelector('video') : null;
+  return { frame: frame, video: video };
+}
+
+function updateLiveVideoControls() {
+  const { frame, video } = getLiveVideoElements();
+  if (!frame || !video) return;
+  const playBtn = document.getElementById('livePlayBtn');
+  const muteBtn = document.getElementById('liveMuteBtn');
+  const fullscreenBtn = document.getElementById('liveFullscreenBtn');
+  const isFullscreen = document.fullscreenElement === frame || document.webkitFullscreenElement === frame;
+  if (playBtn) playBtn.classList.toggle('is-playing', !video.paused);
+  if (muteBtn) muteBtn.classList.toggle('is-muted', video.muted || video.volume === 0);
+  if (fullscreenBtn) {
+    fullscreenBtn.classList.toggle('is-fullscreen', isFullscreen);
+    fullscreenBtn.setAttribute('aria-label', isFullscreen ? '전체화면 닫기' : '전체화면으로 보기');
+  }
+}
+
+async function toggleLiveVideoPlayback(event) {
+  if (event) event.stopPropagation();
+  const { video } = getLiveVideoElements();
+  if (!video) return;
+  try {
+    if (video.paused) await video.play();
+    else video.pause();
+  } catch (error) {}
+  updateLiveVideoControls();
+}
+
+function toggleLiveVideoMute(event) {
+  if (event) event.stopPropagation();
+  const { video } = getLiveVideoElements();
+  if (!video) return;
+  video.muted = !video.muted;
+  if (!video.muted && video.volume === 0) video.volume = 0.8;
+  updateLiveVideoControls();
+}
+
+async function toggleLiveVideoFullscreen(event) {
+  if (event) event.stopPropagation();
+  const { frame } = getLiveVideoElements();
+  if (frame && (document.fullscreenElement === frame || document.webkitFullscreenElement === frame)) {
+    try {
+      if (document.exitFullscreen) await document.exitFullscreen();
+      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+    } catch (error) {}
+    try {
+      if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
+    } catch (error) {}
+    updateLiveVideoControls();
+    return;
+  }
+  await openLiveVideoFullscreen();
+}
+
+async function openLiveVideoFullscreen() {
+  const { frame, video } = getLiveVideoElements();
+  if (!frame || !video) return;
+
+  try {
+    await video.play();
+  } catch (error) {}
+
+  if (document.fullscreenElement || document.webkitFullscreenElement) return;
+
+  try {
+    if (frame.requestFullscreen) {
+      await frame.requestFullscreen();
+    } else if (frame.webkitRequestFullscreen) {
+      frame.webkitRequestFullscreen();
+    } else if (video.webkitEnterFullscreen) {
+      video.webkitEnterFullscreen();
+    }
+  } catch (error) {
+    if (video.webkitEnterFullscreen) video.webkitEnterFullscreen();
+  }
+
+  try {
+    if (screen.orientation && screen.orientation.lock) {
+      await screen.orientation.lock('landscape');
+    }
+  } catch (error) {}
+  updateLiveVideoControls();
+}
+
+document.addEventListener('fullscreenchange', updateLiveVideoControls);
+document.addEventListener('webkitfullscreenchange', updateLiveVideoControls);
+
 const baseMealRecords = [
-  { date: '2026-05-09', time: '08:20', meal: '아침', title: '닭가슴살 베이스 사료', status: '완식', duration: 10, photo: true, image: 'dog%20image%20sample/KakaoTalk_20260509_120800807_01.jpg' },
-  { date: '2026-05-09', time: '12:40', meal: '점심', title: '연어 오일 토핑 스페셜', status: '일부', duration: 14, photo: true, image: 'dog%20image%20sample/KakaoTalk_20260509_120800807_02.jpg' },
-  { date: '2026-05-09', time: '18:10', meal: '저녁', title: '소고기 야채 믹스', status: '완식', duration: 12, photo: true, image: 'dog%20image%20sample/KakaoTalk_20260509_120800807_03.jpg' },
-  { date: '2026-05-08', time: '08:10', meal: '아침', title: '산양유 파우더 토핑', status: '완식', duration: 11, photo: false, image: 'dog%20image%20sample/KakaoTalk_20260509_120800807_04.jpg' },
-  { date: '2026-05-08', time: '19:00', meal: '저녁', title: '닭가슴살 베이스 사료', status: '완식', duration: 13, photo: true, image: 'dog%20image%20sample/KakaoTalk_20260509_120800807_05.jpg' }
+  { date: '2026-05-09', time: '12:40', meal: '점심', title: '연어 오일 토핑 스페셜 사료와 불린 건당근', status: '완식', duration: 14, photo: true, image: 'dog%20image%20sample/KakaoTalk_20260509_120800807_02.jpg', text: '점심은 연어 오일 토핑 스페셜 사료와 불린 건당근!! 맛있게 먹었지 두부야~' },
+  { date: '2026-05-09', time: '08:20', meal: '아침', title: '닭가슴살 베이스 사료', status: '완식', duration: 10, photo: true, image: 'dog%20image%20sample/KakaoTalk_20260509_120800807_01.jpg', text: '아침으로 닭가슴살 베이스 사료! 우리 두부 다 먹었어요!!' },
+  { date: '2026-05-08', time: '18:10', meal: '저녁', title: '닭가슴살 베이스 사료와 습식 파우치', status: '완식', duration: 12, photo: true, image: 'dog%20image%20sample/KakaoTalk_20260509_120800807_03.jpg', text: '저녁은 닭가슴살 베이스 사료에 습식 파우치를 더해 씹는 리듬이 안정적이었어요.' },
+  { date: '2026-05-06', time: '08:30', meal: '아침', title: '연어 오일 토핑 스페셜 사료와 단호박', status: '완식', duration: 11, photo: true, image: 'dog%20image%20sample/KakaoTalk_20260509_120800807_04.jpg', text: '연어 오일 토핑 스페셜 사료와 단호박 조합에서 섭취 속도가 안정적이었어요.' },
+  { date: '2026-05-04', time: '12:20', meal: '점심', title: '오트밀 현미 건식 사료', status: '일부 섭취', duration: 18, photo: true, image: 'dog%20image%20sample/KakaoTalk_20260509_120800807_05.jpg', text: '오트밀 현미 건식 사료는 접근 후 이탈이 많아 기호성 점수가 낮게 나왔어요.' }
+];
+
+const weeklyReportDays = [
+  { date: '2026-05-09', score: 88, duration: 14, photo: true },
+  { date: '2026-05-08', score: 79, duration: 12, photo: true },
+  { date: '2026-05-06', score: 74, duration: 11, photo: true },
+  { date: '2026-05-04', score: 55, duration: 18, photo: true }
 ];
 
 const popularFeeds = [
@@ -3510,19 +3939,12 @@ function openFeedDetail(id) {
 }
 
 function getCareMetrics() {
-  var records = getMealRecords();
-  var completed = records.filter(function (r) { return r.status === '완식'; }).length;
-  var completionRate = records.length ? Math.round(completed / records.length * 100) : 0;
-  var lastWeekRate = 70;
-  var diff = completionRate - lastWeekRate;
+  var records = weeklyReportDays.slice();
   var photoRate = records.length ? Math.round(records.filter(function (r) { return r.photo; }).length / records.length * 100) : 0;
-  var avg = records.length ? Math.round(records.reduce(function (sum, r) { return sum + Number(r.duration || 0); }, 0) / records.length) : 0;
-  var prevAvg = 14;
-  var dates = Array.from(new Set(records.map(function (r) { return r.date; }))).sort().reverse();
-  var streak = 0;
-  var cursor = new Date('2026-05-09T00:00:00');
-  while (dates.indexOf(cursor.toISOString().slice(0, 10)) !== -1) { streak += 1; cursor.setDate(cursor.getDate() - 1); }
-  return { total: records.length, completionRate: completionRate, diff: diff, photoRate: photoRate, avg: avg, avgDiff: avg - prevAvg, streak: streak };
+  var avg = 9;
+  var prevAvg = 11;
+  var streak = 2;
+  return { total: records.length, completionRate: 80, diff: 10, photoRate: photoRate, avg: avg, avgDiff: avg - prevAvg, streak: streak };
 }
 function renderCareMetrics() {
   var m = getCareMetrics();
@@ -3532,11 +3954,11 @@ function renderCareMetrics() {
   setText('careAvgMealTime', m.avg);
   setText('careAvgDiff', '전주 대비 ' + (m.avgDiff > 0 ? '+' : '') + m.avgDiff + '분');
   setText('careStreakDays', m.streak);
-  setText('careStreakText', m.streak >= 5 ? '꾸준하게 기록 중' : '지금 기록하러 가기');
+  setText('careStreakText', m.streak >= 2 ? '금·토 연속 기록' : '지금 기록하러 가기');
   var score = document.querySelector('#s-care-feed .rp-hero-num');
   if (score) score.textContent = String(m.completionRate);
   var caption = document.querySelector('#s-care-feed .rp-hero-caption');
-  if (caption) caption.innerHTML = '이번 주 완식률 · 지난주 대비 <strong>' + (m.diff > 0 ? '+' : '') + m.diff + '%p</strong>';
+  if (caption) caption.innerHTML = '지난주 대비<br><strong>이번주 완식률 +' + m.diff + '%p</strong>';
   setText('careTrendBadge', '추세 ' + (m.diff >= 0 ? '↑' : '↓'));
   renderCareFeedPreview();
 }
@@ -3544,7 +3966,7 @@ function renderCareFeedPreview() {
   var box = document.getElementById('careFeedPreview');
   if (!box) return;
   box.innerHTML = getMealRecords().slice(0, 3).map(function (r) {
-    return '<div class="feed-post3"><div class="fp-head"><div class="fp-ava"><img src="' + r.image + '" alt=""></div><div><div class="fp-name">두부</div><div class="fp-time">' + getDateLabel(r.date) + ' ' + r.time + '</div></div><div class="fp-pet">' + escapeHtml(r.meal) + '</div></div><div class="fp-img"><img src="' + r.image + '" alt=""></div><div class="fp-body"><div class="fp-txt">' + escapeHtml(r.title + ' · ' + r.status + ' 기록입니다.') + '</div></div></div>';
+    return '<div class="feed-post3"><div class="fp-head"><div class="fp-ava"><img src="dog%20image%20sample/KakaoTalk_20260509_120800807.jpg" alt=""></div><div><div class="fp-name">두부</div><div class="fp-time">' + getDateLabel(r.date) + ' ' + r.time + '</div></div><div class="fp-pet">' + escapeHtml(r.meal) + '</div></div><div class="fp-img"><img class="care-feed-photo" src="' + r.image + '" alt=""></div><div class="fp-body"><div class="fp-txt">' + escapeHtml(r.text || (r.title + ' · ' + r.status + ' 기록입니다.')) + '</div></div></div>';
   }).join('');
 }
 
@@ -4030,6 +4452,13 @@ document.addEventListener('DOMContentLoaded', function () {
   renderMealRecords();
   renderCareMetrics();
   updateMyGroupCount();
+  var liveVideo = document.querySelector('#s-live-analysis .live-video video');
+  if (liveVideo) {
+    liveVideo.addEventListener('play', updateLiveVideoControls);
+    liveVideo.addEventListener('pause', updateLiveVideoControls);
+    liveVideo.addEventListener('volumechange', updateLiveVideoControls);
+    updateLiveVideoControls();
+  }
 
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') closeUploadModal();
@@ -4040,7 +4469,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (r) {
       var c = 2 * Math.PI * 25;
       r.style.strokeDasharray = String(c);
-      r.style.strokeDashoffset = String(c * (2 / 3));
+      r.style.strokeDashoffset = String(c * (1 / 3));
     }
   }, 200);
 });
