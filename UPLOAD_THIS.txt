@@ -1,0 +1,18 @@
+GitHub web upload safe folder:
+C:\PetFood\GITHUB_WEB_UPLOAD_SMALL
+
+Upload the contents of this folder to the repository root.
+
+Do not upload:
+- C:\PetFood\FINAL_GITHUB_UPLOAD if GitHub web upload complains
+- old APK files
+- the original 28MB app video
+
+Android URL after upload:
+https://competiton-33.github.io/-Pet-Preference-Data-Platform/DanQ-v13.apk
+
+iPhone URL after upload:
+https://competiton-33.github.io/-Pet-Preference-Data-Platform/iphone-v13.html
+
+iPhone direct web app URL:
+https://competiton-33.github.io/-Pet-Preference-Data-Platform/app-v13.html
